@@ -1,1 +1,1 @@
-# Schoolgram
+# Instaclone Frontend
