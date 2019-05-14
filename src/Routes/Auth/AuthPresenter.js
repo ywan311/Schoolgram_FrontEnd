@@ -74,6 +74,7 @@ export default ({
         <>
           <Helmet>
             <title>Sign Up | schoolgram</title>
+
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder={"First name"} {...firstName} />
