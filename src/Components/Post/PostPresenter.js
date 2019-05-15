@@ -3,7 +3,13 @@ import styled from "styled-components";
 import TextareaAutosize from "react-autosize-textarea";
 import FatText from "../FatText";
 import Avatar from "../Avatar";
-import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
+import {
+  HeartFull,
+  HeartEmpty,
+  Comment as CommentIcon,
+  Edit,
+  Delete
+} from "../Icons";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -38,7 +44,7 @@ const Files = styled.div`
   flex-shrink: 0;
 `;
 
-const File = styled.div`
+const File = styled.img`
   max-width: 100%;
   width: 100%;
   height: 600px;
@@ -66,6 +72,14 @@ const Buttons = styled.div`
     }
   }
   margin-bottom: 10px;
+`;
+const editButton = styled.div`
+  ${Button} {
+    &:first-child {
+      margin-left: 30px;
+    }
+  }
+  margin-left: 10px;
 `;
 
 const Timestamp = styled.span`
@@ -144,12 +158,28 @@ export default ({
             <Comment key={comment.id}>
               <FatText text={comment.user.username} />
               {comment.text}
+              <editButton style={{ marginLeft: "20px" }}>
+                <Button>
+                  <Edit />
+                </Button>
+                <Button>
+                  <Delete />
+                </Button>
+              </editButton>
             </Comment>
           ))}
           {selfComments.map(comment => (
             <Comment key={comment.id}>
               <FatText text={comment.user.username} />
               {comment.text}
+              <editButton style={{ marginLeft: "20px" }}>
+                <Button>
+                  <Edit />
+                </Button>
+                <Button>
+                  <Delete />
+                </Button>
+              </editButton>
             </Comment>
           ))}
         </Comments>
