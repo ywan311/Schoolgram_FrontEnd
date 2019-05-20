@@ -17,3 +17,15 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const EDIT_COMMENT = gql`
+  mutation editComment($id: String!, $text: String) {
+    editComment(id: $id, text: $text) {
+      id
+      text
+      user {
+        username
+      }
+    }
+  }
+`;

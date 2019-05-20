@@ -10,6 +10,7 @@ import {
   Edit,
   Delete
 } from "../Icons";
+import { Modal } from "react-bootstrap";
 
 const Post = styled.div`
   ${props => props.theme.whiteBox};
@@ -73,14 +74,6 @@ const Buttons = styled.div`
   }
   margin-bottom: 10px;
 `;
-const editButton = styled.div`
-  ${Button} {
-    &:first-child {
-      margin-left: 30px;
-    }
-  }
-  margin-left: 10px;
-`;
 
 const Timestamp = styled.span`
   font-weight: 400;
@@ -126,7 +119,10 @@ export default ({
   toggleLike,
   onKeyPress,
   comments,
-  selfComments
+  selfComments,
+  show,
+  handleShow,
+  handleClose
 }) => (
   <Post>
     <Header>
@@ -158,28 +154,24 @@ export default ({
             <Comment key={comment.id}>
               <FatText text={comment.user.username} />
               {comment.text}
-              <editButton style={{ marginLeft: "20px" }}>
-                <Button>
-                  <Edit />
-                </Button>
-                <Button>
-                  <Delete />
-                </Button>
-              </editButton>
+              <Button style={{ marginLeft: "20px" }} onClick={handleShow}>
+                <Edit />
+              </Button>
+              <Button>
+                <Delete />
+              </Button>
             </Comment>
           ))}
           {selfComments.map(comment => (
             <Comment key={comment.id}>
               <FatText text={comment.user.username} />
               {comment.text}
-              <editButton style={{ marginLeft: "20px" }}>
-                <Button>
-                  <Edit />
-                </Button>
-                <Button>
-                  <Delete />
-                </Button>
-              </editButton>
+              <Button style={{ marginLeft: "20px" }} onClick={handleShow}>
+                <Edit />
+              </Button>
+              <Button>
+                <Delete />
+              </Button>
             </Comment>
           ))}
         </Comments>
@@ -192,5 +184,26 @@ export default ({
         onChange={newComment.onChange}
       />
     </Meta>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Edit comments</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {comments.map(comment => (
+          <Comment key={comment.id}>{comment.text}</Comment>
+        ))}
+        {selfComments.map(comment => (
+          <Comment key={comment.id}>{comment.text}</Comment>
+        ))}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleClose}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   </Post>
 );

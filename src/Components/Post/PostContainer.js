@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
 import { useMutation } from "react-apollo-hooks";
-import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
+import { TOGGLE_LIKE, ADD_COMMENT, EDIT_COMMENT } from "./PostQueries";
 import { toast } from "react-toastify";
 
 const PostContainer = ({
@@ -17,6 +17,7 @@ const PostContainer = ({
   caption,
   location
 }) => {
+  const [isShow, setModalShow] = useState(false);
   const [isLikedS, setIsLiked] = useState(isLiked);
   const [likeCountS, setLikeCount] = useState(likeCount);
   const [currentItem, setCurrentItem] = useState(0);
@@ -27,6 +28,9 @@ const PostContainer = ({
   });
   const addCommentMutation = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value }
+  });
+  const editCommentMutation = useMutation(EDIT_COMMENT, {
+    variables: { id: comment.id, text: comment.value }
   });
   const slide = () => {
     const totalFiles = files.length;
@@ -67,6 +71,14 @@ const PostContainer = ({
     }
   };
 
+  const handleClose = () => {
+    setModalShow(false);
+  };
+
+  const handleShow = () => {
+    setModalShow(true);
+  };
+
   return (
     <PostPresenter
       user={user}
@@ -84,6 +96,9 @@ const PostContainer = ({
       toggleLike={toggleLike}
       onKeyPress={onKeyPress}
       selfComments={selfComments}
+      show={isShow}
+      handleClose={handleClose}
+      handleShow={handleShow}
     />
   );
 };
@@ -115,7 +130,10 @@ PostContainer.propTypes = {
   ).isRequired,
   caption: PropTypes.string.isRequired,
   location: PropTypes.string,
-  createdAt: PropTypes.string.isRequired
+  createdAt: PropTypes.string.isRequired,
+  show: PropTypes.bool,
+  handleClose: PropTypes.bool,
+  handleShow: PropTypes.bool
 };
 
 export default PostContainer;
