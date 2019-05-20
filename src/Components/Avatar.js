@@ -24,7 +24,6 @@ const Container = styled.div`
   border-radius:50%;
 `;
 
-
 const Avatar = ({ size = "sm", url, className }) => (
   <Container className={className} size={size} url={url} />
 );
