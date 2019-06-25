@@ -8,6 +8,7 @@ import FollowButton from "../../Components/FollowButton";
 import SquarePost from "../../Components/SquarePost";
 import Button from "../../Components/Button";
 
+
 const Wrapper = styled.div`
   min-height: 100vh;
 `;
@@ -21,7 +22,10 @@ const Header = styled.header`
   margin-bottom: 40px;
 `;
 
-const HeaderColumn = styled.div``;
+const HeaderColumn = styled.div`
+  
+
+`;
 
 const UsernameRow = styled.div`
   display: flex;
@@ -29,7 +33,7 @@ const UsernameRow = styled.div`
 `;
 
 const Username = styled.span`
-  font-size: 26px;
+  font-size: 26;
   display: block;
 `;
 
@@ -47,10 +51,14 @@ const Count = styled.li`
 
 const FullName = styled(FatText)`
   font-size: 16px;
+  -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+  transition:width 2s, height 2s, background-color 2s, transform 2s;
 `;
 
 const Bio = styled.p`
   margin: 10px 0px;
+  -webkit-transform:rotate(180deg);
+  transform:rotate(180deg);
 `;
 
 const Posts = styled.div`
@@ -58,6 +66,17 @@ const Posts = styled.div`
   grid-template-columns: repeat(4, 200px);
   grid-template-rows: 200px;
   grid-auto-rows: 200px;
+ 
+  -webkit-transition-duration: 200ms;
+  -moz-transition-duration: 200ms;
+  -o-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  -webkit-transform:rotate(180deg);
+  transform:rotate(360deg);
 `;
 
 export default ({ loading, data, logOut }) => {
