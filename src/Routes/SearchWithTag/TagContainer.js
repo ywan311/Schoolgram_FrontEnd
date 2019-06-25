@@ -6,24 +6,9 @@ import { TAG } from "./TagQueries";
 import gql from "graphql-tag";
 import PropTypes from "prop-types"
 
-const GET_TAG_POST = gql`
-  query searchPostWithTag($tag: String!){
-    searchPostWithTag(tag: $tag){
-      id
-      user
-      files{
-        url
-      }
-      createAt
-      likeCount
-    }
-  }
-`
-export default withRouter(({ match: { params: { tagname } } }) => {
-  const { tag, data, loading } = useQuery(GET_TAG_POST, {variable:{tagname} });
+export default withRouter(({ match: { params: { tag } } }) => {
   withRouter.propTypes ={
-    tag: PropTypes.string,
-    loading: PropTypes.string,
-  }
-  return <TagPresenter tag= {tag}loading={loading} data={data} />;
+    tag: PropTypes.string
+    }
+  return <TagPresenter tag= {tag} />;
 });
